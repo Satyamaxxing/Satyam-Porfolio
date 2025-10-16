@@ -22,7 +22,52 @@ A modern, minimal personal portfolio website built with clean HTML, CSS, and Jav
 ## 📁 Project Structure
 
 ```
-portfolio-website/
+# Satyamaxxing Portfolio
+
+Professional portfolio website for Satyam Kumar - Computer Science Engineer.
+
+## Features
+
+- 🎨 **Dark/Light Theme Toggle** - Seamless theme switching with smooth animations
+- 👁️ **Visitor Counter** - Track website visitors with animated counter
+- 📱 **Fully Responsive** - Optimized for all devices and screen sizes
+- ✨ **Animated Background** - Dynamic "SATYAM" text with gradient effects
+- 🎯 **Interactive Elements** - Professional hover effects and animations
+- 🔗 **Social Integration** - Connected GitHub, LinkedIn, X, Instagram, and Email
+- ⚡ **Performance Optimized** - Fast loading with smooth animations
+- ♿ **Accessible** - Follows web accessibility best practices
+
+## Technologies Used
+
+- HTML5
+- CSS3 (Modern features: CSS Grid, Flexbox, Custom Properties, Animations)
+- Vanilla JavaScript (ES6+)
+- Font Awesome Icons
+- Google Fonts (Inter)
+
+## Theme
+
+Professional black, white, and grey color scheme with:
+- Pitch black dark theme
+- Clean white light theme
+- Smooth transitions between themes
+- Consistent design language
+
+## Deployment
+
+This website is deployed at [satyamaxxing.in](https://satyamaxxing.in)
+
+## Contact
+
+- **Email**: satyamggacc@gmail.com
+- **GitHub**: [@Satyamaxxing](https://github.com/Satyamaxxing)
+- **LinkedIn**: [Satyam Kumar](https://www.linkedin.com/in/satyam-kumar-58906a327/)
+- **X**: [@Satyamaxxing](https://x.com/Satyamaxxing)
+- **Instagram**: [@satyamaxxing](https://www.instagram.com/satyamaxxing/)
+
+---
+
+*"The syntax of today, the system of tomorrow."*
 ├── index.html           # Main HTML file
 ├── assets/
 │   ├── style.css       # Complete stylesheet with theme support
