@@ -1,6 +1,10 @@
-// Simple Portfolio JavaScript
+/**
+ * Portfolio Website JavaScript
+ * Handles theme switching, animations, visitor counter, and interactive features
+ */
 class SimplePortfolio {
     constructor() {
+        // Initialize core properties
         this.theme = localStorage.getItem('theme') || 'dark';
         this.themeToggle = document.getElementById('theme-toggle');
         this.loadMoreBtn = document.querySelector('.load-more-btn');
