@@ -16,6 +16,9 @@ class SimplePortfolio {
         this.init();
     }
 
+    /**
+     * Initialize all portfolio features
+     */
     init() {
         this.setupTheme();
         this.setupLoadMore();
