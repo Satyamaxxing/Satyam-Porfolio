@@ -331,7 +331,7 @@ class SimplePortfolio {
         this.trackDeviceInfo();
     }
     
-    // Track additional device and location info
+    // Track additional device info (no location permission needed)
     trackDeviceInfo() {
         if (typeof gtag !== 'undefined') {
             // Send device info to Google Analytics
@@ -342,22 +342,6 @@ class SimplePortfolio {
                 'color_depth': screen.colorDepth,
                 'timezone': Intl.DateTimeFormat().resolvedOptions().timeZone
             });
-        }
-        
-        // Optional: Get more precise location (requires user permission)
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'precise_location', {
-                            'latitude': position.coords.latitude.toFixed(2),
-                            'longitude': position.coords.longitude.toFixed(2)
-                        });
-                    }
-                },
-                () => {}, // Ignore if user denies permission
-                { timeout: 5000 }
-            );
         }
     }
 
