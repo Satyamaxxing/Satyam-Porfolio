@@ -4,6 +4,7 @@
     --bg: #ffffff;
     --bg-secondary: #f5f5f5;
     --bg-tertiary: #e5e5e5;
+    --bg-secondary-rgb: 245, 245, 245;
     --text: #1a1a1a;
     --text-light: #333333;
     --text-muted: #666666;
@@ -48,6 +49,7 @@
     --bg: #000000;
     --bg-secondary: #0a0a0a;
     --bg-tertiary: #1a1a1a;
+    --bg-secondary-rgb: 10, 10, 10;
     --text: #ffffff;
     --text-light: #e5e5e5;
     --text-muted: #a3a3a3;
@@ -201,15 +203,6 @@ body {
     }
 }
 
-/* Ensure light mode has same visibility as dark mode */
-[data-theme="light"] .bg-text,
-:root .bg-text {
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.2);
-    text-shadow: 
-        0 0 30px rgba(0, 0, 0, 0.15),
-        0 0 60px rgba(0, 0, 0, 0.1),
-        0 0 90px rgba(0, 0, 0, 0.05);
-}
 
 /* ===== Theme Toggle ===== */
 .theme-toggle {
@@ -286,6 +279,12 @@ section {
     margin-bottom: var(--space-2xl);
 }
 
+/* Add extra gap before About section */
+.about {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+}
+
 h1, h2, h3 {
     font-weight: 600;
     color: var(--text);
@@ -315,7 +314,9 @@ a:hover {
 /* ===== Hero Section ===== */
 .hero {
     text-align: center;
-    padding: var(--space-2xl) 0;
+    padding: var(--space-lg) 0;
+    margin-top: -var(--space-md);
+    margin-bottom: var(--space-xl);
 }
 
 .profile-section {
@@ -327,8 +328,8 @@ a:hover {
 
 .profile-image {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid var(--border);
@@ -339,6 +340,39 @@ a:hover {
     transform: scale(1.05);
     border-color: var(--accent);
 }
+
+.profile-image {
+    transition: all 0.3s ease, transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Sarcastic Message Styles */
+.sarcastic-message {
+    background: transparent;
+    color: var(--text);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius);
+    margin: var(--space-lg) auto;
+    max-width: 500px;
+    text-align: center;
+    font-size: var(--font-base);
+    font-weight: 500;
+    box-shadow: none;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: none;
+    backdrop-filter: none;
+    z-index: 10;
+}
+
+.sarcastic-message.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+
 
 .profile-image img {
     width: 100%;
@@ -366,6 +400,40 @@ a:hover {
 
 .profile-info h1 {
     margin-bottom: var(--space-sm);
+    line-height: 1.2;
+}
+
+.profile-info h1 .greeting {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.profile-info h1 .name {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    font-size: 1.3em;
+    font-style: italic;
+    color: var(--text);
+}
+
+.profile-info h1 .emoji {
+    font-size: 1.1em;
+    display: inline-block;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
 }
 
 .profile-info p {
@@ -840,12 +908,14 @@ footer p {
     }
     
     .hero {
-        padding: var(--space-xl) 0;
+        padding: var(--space-lg) 0;
+        margin-top: 0;
+        margin-bottom: var(--space-lg);
     }
     
     .profile-image {
-        width: 120px;
-        height: 120px;
+        width: 160px;
+        height: 160px;
     }
     
     h1 { font-size: var(--font-2xl); }
@@ -889,6 +959,19 @@ footer p {
     .counter-display i {
         font-size: var(--font-base);
     }
+    
+    /* Reduce About section spacing on mobile */
+    .about {
+        margin-top: var(--space-lg);
+        padding-top: var(--space-md);
+    }
+    
+    /* Improve sarcastic message on mobile */
+    .sarcastic-message {
+        font-size: var(--font-sm);
+        padding: var(--space-xs) var(--space-md);
+        max-width: 90vw;
+    }
 }
 
 @media (max-width: 480px) {
@@ -897,12 +980,37 @@ footer p {
     }
     
     section {
-        margin-bottom: var(--space-xl);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .hero {
+        padding: var(--space-md) 0;
+        margin-top: 0;
+        margin-bottom: var(--space-md);
+    }
+    
+    /* Further reduce About section spacing on small mobile */
+    .about {
+        margin-top: var(--space-md);
+        padding-top: var(--space-sm);
+    }
+    
+    /* Improve button sizing on small mobile */
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: var(--space-xs) var(--space-md);
+    }
+    
+    /* Better text sizing */
+    .profile-info p {
+        font-size: var(--font-sm);
+        line-height: 1.6;
     }
     
     .profile-image {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
     }
     
     .skills-grid {

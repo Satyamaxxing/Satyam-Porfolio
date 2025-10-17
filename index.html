@@ -14,6 +14,24 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/style.css">
+    
+    <!-- Google Analytics -->
+    <!-- Replace GA_TRACKING_ID with your actual Google Analytics tracking ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_TRACKING_ID');
+    </script>
+    
+    <!-- Immediate theme application -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
     <!-- Theme Toggle Button -->
@@ -36,7 +54,10 @@
                     </div>
                 </div>
                 <div class="profile-info">
-                    <h1>Hi, I'm Satyam Kumar 👋</h1>
+                    <h1>
+                        <span class="greeting">Heyy, I'm</span><br>
+                        <span class="name">Satyam Kumar</span> <span class="emoji">🙋🏻</span>
+                    </h1>
                     <p>Computer Science Engineer who loves building clean and efficient digital experiences.</p>
                     <div class="hero-buttons">
                         <a href="mailto:satyamggacc@gmail.com?subject=Resume%20Request%20-%20Satyam%20Kumar&body=Hi%20Satyam,%0A%0AI%20would%20like%20to%20request%20your%20resume.%0A%0AThank%20you!" class="btn btn-primary">
