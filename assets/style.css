@@ -556,11 +556,28 @@ a:hover {
 }
 
 /* ===== Skills Section ===== */
+.skills-subtitle {
+    font-size: var(--font-sm);
+    font-weight: 400;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-left: var(--space-xs);
+}
+
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: var(--space-sm);
     margin-top: var(--space-md);
+}
+
+.skills-note {
+    text-align: center;
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: var(--space-lg);
+    margin-bottom: 0;
 }
 
 .skill {
