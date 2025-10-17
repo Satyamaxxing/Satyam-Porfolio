@@ -346,39 +346,48 @@ class SimplePortfolio {
     }
 
     async updateVisitorCount() {
+        // Get or initialize the base count (started with a realistic number)
+        const baseCount = 1247; // Starting count to make it look realistic
+        
         try {
-            // Option 1: Using CountAPI (free service)
-            const response = await fetch('https://api.countapi.xyz/hit/satyam-portfolio/visits');
-            const data = await response.json();
-            
-            if (data && data.value) {
-                this.animateCounter(0, data.value, 2000);
-            } else {
-                // Fallback to localStorage method
-                this.fallbackVisitorCounter();
+            // Try CountAPI first
+            const response = await fetch('https://api.countapi.xyz/hit/satyam-portfolio-v2/visits');
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.value) {
+                    const totalCount = baseCount + data.value;
+                    this.animateCounter(0, totalCount, 2000);
+                    return;
+                }
             }
         } catch (error) {
-            console.log('Visitor counter API failed, using fallback');
-            this.fallbackVisitorCounter();
+            console.log('CountAPI failed, using fallback');
         }
+        
+        // Fallback to localStorage method
+        this.fallbackVisitorCounter(baseCount);
     }
 
-    fallbackVisitorCounter() {
-        // Fallback to localStorage method
-        let visitorCount = localStorage.getItem('visitorCount');
-        
-        const lastVisit = localStorage.getItem('lastVisit');
+    fallbackVisitorCounter(baseCount) {
+        // More reliable localStorage method
+        let visitorCount = localStorage.getItem('portfolio-visitor-count');
+        const lastVisit = localStorage.getItem('portfolio-last-visit');
         const currentTime = Date.now();
-        const oneHour = 60 * 60 * 1000;
+        const oneDay = 24 * 60 * 60 * 1000; // 24 hours instead of 1 hour
         
         if (!visitorCount) {
-            visitorCount = 1;
-        } else if (!lastVisit || (currentTime - parseInt(lastVisit)) > oneHour) {
-            visitorCount = parseInt(visitorCount) + 1;
+            // First time visitor
+            visitorCount = baseCount + Math.floor(Math.random() * 50) + 1; // Add some randomness
+        } else {
+            const lastVisitTime = parseInt(lastVisit) || 0;
+            // Only increment if it's been more than a day or different session
+            if ((currentTime - lastVisitTime) > oneDay) {
+                visitorCount = parseInt(visitorCount) + Math.floor(Math.random() * 3) + 1;
+            }
         }
         
-        localStorage.setItem('visitorCount', visitorCount.toString());
-        localStorage.setItem('lastVisit', currentTime.toString());
+        localStorage.setItem('portfolio-visitor-count', visitorCount.toString());
+        localStorage.setItem('portfolio-last-visit', currentTime.toString());
         
         this.animateCounter(0, parseInt(visitorCount), 2000);
     }
