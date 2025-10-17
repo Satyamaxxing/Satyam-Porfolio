@@ -328,6 +328,37 @@ class SimplePortfolio {
     // Real Visitor Counter using API
     setupVisitorCounter() {
         this.updateVisitorCount();
+        this.trackDeviceInfo();
+    }
+    
+    // Track additional device and location info
+    trackDeviceInfo() {
+        if (typeof gtag !== 'undefined') {
+            // Send device info to Google Analytics
+            gtag('event', 'device_info', {
+                'custom_parameter_1': navigator.userAgent,
+                'screen_resolution': screen.width + 'x' + screen.height,
+                'viewport_size': window.innerWidth + 'x' + window.innerHeight,
+                'color_depth': screen.colorDepth,
+                'timezone': Intl.DateTimeFormat().resolvedOptions().timeZone
+            });
+        }
+        
+        // Optional: Get more precise location (requires user permission)
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'precise_location', {
+                            'latitude': position.coords.latitude.toFixed(2),
+                            'longitude': position.coords.longitude.toFixed(2)
+                        });
+                    }
+                },
+                () => {}, // Ignore if user denies permission
+                { timeout: 5000 }
+            );
+        }
     }
 
     async updateVisitorCount() {
